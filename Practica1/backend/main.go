@@ -8,7 +8,6 @@ import (
 	"practica1/server"
 
 	"github.com/rs/cors"
-
 	"go.mongodb.org/mongo-driver/mongo"
 )
 

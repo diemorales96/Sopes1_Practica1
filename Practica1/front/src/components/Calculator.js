@@ -4,13 +4,11 @@ import CalcButton from './buttons';
 import calculate from '../logic/calculate';
 import axios from "axios";
 
-// eslint-disable-next-line react/prefer-stateless-function
 var x = 0;
 var y = 0;
 var temp = "";
 var operador = '';
-var masmenos = 1;
-//var endp;
+
 
 const Calculator = () => {
   const [totals, setTotals] = useState({});
@@ -24,7 +22,7 @@ const Calculator = () => {
 
   const handleClick = (event) => {
     setTotals(calculate(totals, event.target.textContent));
-    
+
     if(event.target.textContent == "+" || event.target.textContent == "-"||event.target.textContent == "x"||event.target.textContent == "÷"){
       x = temp;
       temp = "";
@@ -32,9 +30,7 @@ const Calculator = () => {
     }else if(event.target.textContent == "="){
       y = temp;
       temp = ""
-      //console.log(x)
-      //console.log(y)
-      //console.log(operador)
+      
       const operacion = {
         Numero1: x,
         Numero2: y,
@@ -68,7 +64,6 @@ const Calculator = () => {
     }else{
       if(!isNaN(event.target.textContent)){
         temp += event.target.textContent
-        //console.log("asdf")
       }
     }
 
