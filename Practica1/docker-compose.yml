@@ -1,0 +1,53 @@
+version: "3"
+services:
+    db:
+        container_name: dbmongo
+        image: mongo
+        restart: always
+        ports:
+            - "27017:27017"
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+            - MONGO_INITDB_ROOT_PASSWORD=amarillo1234
+        networks:
+            - Api
+        volumes:
+            - /home/diemorab/practica1/volumenes:/data/db
+
+
+    backend:
+        container_name: backend
+        image : diemorales96/backend_p1_201503958
+        restart: always
+        ports:
+            - '4000:4000'
+        links:
+            - db
+        networks:
+            - Api
+        environment:
+            MONGO_USERNAME: mongoadmin
+            MONGO_PASSWORD: amarillo1234
+            MONGO_HOST: db
+        depends_on:
+            - db
+
+    frontend:
+        container_name: frontend
+        image : diemorales96/frontend_p1_201503958
+        stdin_open: true
+        ports:
+            - '3000:3000'
+        restart: always
+        depends_on:
+            - backend
+        networks:
+            - Api
+
+networks:
+      Api:
+        driver: "bridge"
+        name: "Api"
+
+volumes:
+    mongodata:
